@@ -3,7 +3,7 @@
 # 
 # NOTE: Only edit the parameters in this script. Editing the dependencies may break the package.  
 # 
-# Author: Luis Sanchez (9/21/15)
+# Author: Luis Sanchez (1/27/16)
 #-------------------
 
 library(dplyr)
@@ -42,14 +42,29 @@ source("Scripts/CardsShown.R")
 source("Scripts/Analysis_ImageSignalDetection.R")
 source("Scripts/Analysis_ValueSignalDetection.R")
 source("Scripts/Summary&Percentages.R")
+source("Scripts/DecryptingParticipantResponses.R") 
+
 
 #--------------------- Exports Final CSVs --------------------------- 
+# All of these are Filtered by participant. 
+
+# Exports Clean Qualtrics Data (ordered as presented in qualtrics)
+write.table(Qualtrics_cleanData, "Output/Qualtrics_cleanData.csv", row.names=FALSE, col.names=TRUE, sep=',')
+
+# Exports the Card Schemes for Block 19 (filtered by participant)
+write.table(cardSchemes, "Output/Block19MemorySchemes.csv", row.names=FALSE, col.names=TRUE, sep=',')
+
+# Exports the Order scheme of the memory trials (qualtrics)
+write.table(memoryTrials, "Output/MemoryTrials_orderScheme.csv", row.names=FALSE, col.names=TRUE, sep=',')
+
+
+
+
+
 
 #Exports Final output/analysis for each participant w/o extra columns
-write.table(finalExport, "Output/FinalOutput_MemoryDataAnalysis.csv",
-            row.names=FALSE, col.names=TRUE, sep=',')
+write.table(finalExport, "Output/FinalOutput_MemoryDataAnalysis.csv", row.names=FALSE, col.names=TRUE, sep=',')
 
 #Run the code below to order participant data based on how it was presented
 source("Scripts/DecryptingParticipantResponses.R") 
-write.table(ordered_finalExport, "Output/Ordered_FinalOutput_MemoryDataAnalysis.csv",
-            row.names=FALSE, col.names=TRUE, sep=',')
+write.table(ordered_finalExport, "Output/Ordered_FinalOutput_MemoryDataAnalysis.csv", row.names=FALSE, col.names=TRUE, sep=',')

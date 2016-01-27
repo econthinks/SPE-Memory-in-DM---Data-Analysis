@@ -10,7 +10,7 @@ playerData <- playerData %>%
 
 for (rowIndex in 1:totalParticipants) #iterates through all the participants
 {
-  for (colIndex in cardBegin:cardEnd) #iterates through the 15 images presented per player
+  for (colIndex in 1:15) #iterates through the 15 images presented per player
   { 
     if (memoryTrials[rowIndex,grepl(paste("V",colIndex,"$",sep=""),names(memoryTrials))] < 11) #filters for cards that were shown for analysis
     {
