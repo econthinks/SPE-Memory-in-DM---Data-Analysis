@@ -4,16 +4,6 @@
 # Author: Luis Sanchez (9/26/15)
 #-------------------
 
-
-# #Only un-comment if it is going to be run as a standalone file
-# 
-# library(dplyr)
-# 
-# #This will override FrameworkKickstarter parameters. 
-# firstParticipant <- 1
-# lastParticipant <- 60
-# 
-
 source("Scripts/Cleanup&PreProcessing.R")
 
 #Creates Dataframe where new ordered data will be stores 

@@ -10,10 +10,6 @@
 finalExport <- playerData %>%
   dplyr::select(-matches("c+\\d+$"), -matches("Seen+\\d+$"), -matches("Value+\\d+_4_TEXT"))
 
-#Adds up cards shown to participant. Therefore Shown+ShownTooSlow = 10. 
-finalExport <- finalExport %>%
-  mutate(shown = shown0+shown20+shown40+shown60+shown80+shown100)
-
 #Percentage of Values (total and by increments) remembered correctly/incorrectly (only for Hits) 
 finalExport <- finalExport %>%
   mutate(percent_rememberValue = rememberValue / hits, 

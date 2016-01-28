@@ -35,21 +35,36 @@ inc <- function(x) {eval.parent(substitute(x <- x + 1))}
 # This function multiplies a number x100 whenever it is called. 
 mult100 <- function(x) {eval.parent(substitute(x <- x*100))}
 
+# Counts total number of Participants (used in helper scripts)
+totalParticipants <- (firstParticipant + lastParticipant) - 1
+
 #---------------------- Scripts to Run ---------------------------
 
+# Sorting and Pre-processing Scripts
 source("Scripts/Cleanup&PreProcessing.R") #Cleans the CSVs that were previously loaded
-source("Scripts/CardsShown.R") 
-source("Scripts/Analysis_ImageSignalDetection.R")
-source("Scripts/Analysis_ValueSignalDetection.R")
-source("Scripts/Summary&Percentages.R")
-source("Scripts/DecryptingParticipantResponses.R") 
+source("Scripts/UnscrambleQualtricsMemTestOrder.R") #De-scrambles the Qualtrics Memory Test Data per MemoryTrials CSV
 
+# Recoding Seen, Not Seen, & IDK as Signal Detection (Success = 1 & Failure = 0)
+source("Scripts/RecodeSignalDetection.R") 
+
+# Analysis of Cards shown, Hits/Misses, & Value Detection
+source("Scripts/CardsShown.R") 
+
+
+
+source("Scripts/ImageSignalDetection.R")
+source("Scripts/ValueSignalDetection.R")
+
+
+# Creates Summary statistics
+source("Scripts/Summary&Percentages.R")
 
 #--------------------- Exports Final CSVs --------------------------- 
 # All of these are Filtered by participant. 
 
-# Exports Clean Qualtrics Data (ordered as presented in qualtrics)
+# Exports Clean Qualtrics Data (ordered as presented in qualtrics & unscrambled)
 write.table(Qualtrics_cleanData, "Output/Qualtrics_cleanData.csv", row.names=FALSE, col.names=TRUE, sep=',')
+write.table(Qualtrics_cleanData_ordered, "Output/Ordered_Qualtrics_cleanData.csv", row.names=FALSE, col.names=TRUE, sep=',')
 
 # Exports the Card Schemes for Block 19 (filtered by participant)
 write.table(cardSchemes, "Output/Block19MemorySchemes.csv", row.names=FALSE, col.names=TRUE, sep=',')
