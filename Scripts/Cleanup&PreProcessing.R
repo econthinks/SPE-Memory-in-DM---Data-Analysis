@@ -14,6 +14,7 @@ playerData <- select(playerData_raw, participant, matches("c\\d+$"), matches("Se
 playerData <- playerData[-1,] 
 
 # Simplifies column names for "Value" Columns
+pdNames <- names(playerData) 
 names(playerData) <- gsub("_4_TEXT", "", pdNames)
 
 # Convert Dataframe to Numeric, sort by participant ID, & filter participants (optional)

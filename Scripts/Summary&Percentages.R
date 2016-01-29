@@ -1,17 +1,13 @@
 #--------------------
 # This script uses all the data extracted from the previous scripts and creates
 # summary statistics in terms of percentages. 
-# It will then be exported in the FrameworkKickStarter script. 
+# It will then be exported in the KickStarter script. 
 # 
-# Author: Luis Sanchez (10/01/15)
+# Author: Luis Sanchez (01/28/16)
 #-------------------
 
-#Cleans out user responses and isolates the analysis results
-finalExport <- playerData %>%
-  dplyr::select(-matches("c+\\d+$"), -matches("Seen+\\d+$"), -matches("Value+\\d+_4_TEXT"))
-
 #Percentage of Values (total and by increments) remembered correctly/incorrectly (only for Hits) 
-finalExport <- finalExport %>%
+analysisDf <- analysisDf %>%
   mutate(percent_rememberValue = rememberValue / hits, 
          percent_rememberValue0 = rememberValue0 / hits0,
          percent_rememberValue20 = rememberValue20 / hits20,
@@ -28,7 +24,7 @@ finalExport <- finalExport %>%
          percent_wrongValue100 = wrongValue100 / hits100)
 
 #Percentage breakdown of hits/misses total and by increments in value 
-finalExport <- finalExport %>%
+analysisDf <- analysisDf %>%
   mutate(percent_hits = hits / shown,
          percent_hits0 = hits0 / shown0,
          percent_hits20 = hits20 / shown20,
@@ -44,9 +40,6 @@ finalExport <- finalExport %>%
          percent_misses80 = misses80 / shown80,
          percent_misses100 = misses100 / shown100)
 
-participantSummaries <- finalExport
-
-codedQualtrics_cleanData_unordered <- dplyr::select(playerData, participant, matches("c\\d+$"), matches("Seen\\d+$"), matches("Value\\d+_4_TEXT$"))
-  
-finalExport <- dplyr::full_join(codedQualtrics_cleanData_unordered, finalExport, by = "participant")
+finalExport <- dplyr::full_join(playerData, analysisDf, by = "participant")
+finalExport_ordered <- dplyr::full_join(playerData_ordered, analysisDf, by = "participant") 
 

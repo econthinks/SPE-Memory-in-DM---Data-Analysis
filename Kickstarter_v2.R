@@ -49,12 +49,8 @@ source("Scripts/RecodeSignalDetection.R")
 
 # Analysis of Cards shown, Hits/Misses, & Value Detection
 source("Scripts/CardsShown.R") 
-
-
-
 source("Scripts/ImageSignalDetection.R")
 source("Scripts/ValueSignalDetection.R")
-
 
 # Creates Summary statistics
 source("Scripts/Summary&Percentages.R")
@@ -72,14 +68,6 @@ write.table(cardSchemes, "Output/Block19MemorySchemes.csv", row.names=FALSE, col
 # Exports the Order scheme of the memory trials (qualtrics)
 write.table(memoryTrials, "Output/MemoryTrials_orderScheme.csv", row.names=FALSE, col.names=TRUE, sep=',')
 
-
-
-
-
-
-#Exports Final output/analysis for each participant w/o extra columns
+# Exports Final output/analysis for each participant w/o extra columns (ordered as presented in qualtrics & unscrambled)
 write.table(finalExport, "Output/FinalOutput_MemoryDataAnalysis.csv", row.names=FALSE, col.names=TRUE, sep=',')
-
-#Run the code below to order participant data based on how it was presented
-source("Scripts/DecryptingParticipantResponses.R") 
-write.table(ordered_finalExport, "Output/Ordered_FinalOutput_MemoryDataAnalysis.csv", row.names=FALSE, col.names=TRUE, sep=',')
+write.table(finalExport_ordered, "Output/Ordered_FinalOutput_MemoryDataAnalysis.csv", row.names=FALSE, col.names=TRUE, sep=',')
